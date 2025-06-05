@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app, resources={
     r"/*": {
         "origins": [
-            "https://your-vercel-app.vercel.app",  # Replace with your actual Vercel URL
+            "https://vercel.com/new/darkspore-s-projects/success?developer-id=&external-id=&redirect-url=&branch=main&deploymentUrl=task-manager-okq82qehv-darkspore-s-projects.vercel.app&projectName=task-manager&s=https%3A%2F%2Fgithub.com%2FDarkspore-01%2Ftask-manager&gitOrgLimit=&hasTrialAvailable=1&totalProjects=1&flow-id=06tCprkO_mfnCrhPtxkAA",  # Replace with your actual Vercel URL
             "http://localhost:3000"                # For local development
         ],
         "methods": ["GET", "POST", "OPTIONS"],
