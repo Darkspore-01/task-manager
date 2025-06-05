@@ -1,15 +1,14 @@
 from flask import Flask
 from flask_cors import CORS
-import os # Import os for environment variables
+import os
 
 app = Flask(__name__)
 
-# Configure CORS with explicit settings
 CORS(app, resources={
     r"/*": {
         "origins": [
-            "https://task-manager-okq82qehv-darkspore-s-projects.vercel.app", # <-- Use your ACTUAL Vercel frontend URL here
-            "http://localhost:3000"                                         # For local development
+            "https://task-manager-sable.vercel.app",  # <-- THIS IS THE CRITICAL CHANGE
+            "http://localhost:3000"
         ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type"],
@@ -20,7 +19,6 @@ CORS(app, resources={
 
 @app.route("/")
 def home():
-    # Removed redundant Access-Control-Allow-Origin and Vary headers
     return "Backend is running!", 200
 
 @app.route("/health")
@@ -28,6 +26,5 @@ def health():
     return {"status": "healthy"}, 200
 
 if __name__ == "__main__":
-    # Use os.environ.get('PORT') for Render compatibility
-    port = int(os.environ.get("PORT", 5000)) # Default to 5000 for local if PORT not set
+    port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
