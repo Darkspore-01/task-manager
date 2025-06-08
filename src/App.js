@@ -9,24 +9,41 @@ function App() {
   // Replace with your actual Render backend URL
   const API_URL = "https://flask-backend.onrender.com";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(API_URL);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.text();
-        setBackendMessage(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+useEffect(() => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(API_URL, {
+        signal: controller.signal,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        throw new Error(error.message || 'API request failed');
+      }
+
+      const data = await response.json();
+      setBackendMessage(data.message);
+    } catch (err) {
+      setError(err.name === 'AbortError' 
+        ? 'Connection timeout - Backend might be waking up'
+        : `API Error: ${err.message}`);
+    } finally {
+      clearTimeout(timeoutId);
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+  return () => controller.abort();
+}, []);curl -X OPTIONS https://flask-backend.onrender.com \
 
   return (
     <div className="App">
