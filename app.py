@@ -7,10 +7,9 @@ app = Flask(__name__)
 CORS(app, resources={
     r"/*": {
         "origins": [
-            "https://task-manager-sable.vercel.app",  # <-- THIS IS THE CRITICAL CHANGE
-            "https://task-manager-sable-ten.vercel.app",
+            "https://task-manager-sable-ten.vercel.app",  # Add this back if you removed it
+            "https://task-manager-sable.vercel.app",      # REMOVE THE TRAILING SLASH HERE
             "http://localhost:3000"
-
         ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type"],
