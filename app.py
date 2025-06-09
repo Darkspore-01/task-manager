@@ -10,6 +10,7 @@ CORS(app, resources={
 
             "https://task-manager-sable.vercel.app",
             "https://task-manager-fyqsq2pm4-darkspore-s-projects.vercel.app", # <-- ADD THIS LINE
+            "https://task-manager-o6iqoifxx-darkspore-s-projects.vercel.app",
             "http://localhost:3000"
         ],
         "methods": ["GET", "POST", "OPTIONS"],
