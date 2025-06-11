@@ -8,8 +8,8 @@ CORS(app, resources={
     r"/*": {
         "origins": [
             "https://task-manager-sable.vercel.app",  # <-- THIS IS THE CRITICAL CHANGE
-            "https://task-manager-fyqsq2pm4-darkspore-s-projects.vercel.app"
-            "https://task-manager-o6iqoifxx-darkspore-s-projects.vercel.app",
+            "https://task-manager-git-main-darkspore-s-projects.vercel.app",
+            "task-manager-5yby87s6w-darkspore-s-projects.vercel.app",
             "https://task-manager-rho-vert-37.vercel.app",
             "http://localhost:3000"
         ],
