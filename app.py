@@ -7,9 +7,8 @@ app = Flask(__name__)
 CORS(app, resources={
     r"/*": {
         "origins": [
-
             "https://task-manager-sable.vercel.app",  # <-- THIS IS THE CRITICAL CHANGE
-            "https://task-manager-fyqsq2pm4-darkspore-s-projects.vercel.app",
+            "https://task-manager-fyqsq2pm4-darkspore-s-projects.vercel.app"
             "https://task-manager-o6iqoifxx-darkspore-s-projects.vercel.app",
             "https://task-manager-rho-vert-37.vercel.app",
             "http://localhost:3000"
