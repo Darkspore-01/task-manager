@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 import os
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -10,7 +11,7 @@ CORS(app, resources={
 
             "https://task-manager-sable.vercel.app",
             "https://task-manager-git-main-darkspore-s-projects.vercel.app", # <-- ADD THIS LINE
-            "task-manager-5yby87s6w-darkspore-s-projects.vercel.app",
+            "https://task-manager-n2siopsme-darkspore-s-projects.vercel.app",
             "https://task-manager-rho-vert-37.vercel.app",
             "http://localhost:3000"
         ],
@@ -25,9 +26,10 @@ CORS(app, resources={
 def home():
     return "Backend is running!", 200
 
+
 @app.route("/health")
 def health():
-    return {"status": "healthy"}, 200
+    return jsonify({"status": "healthy"}), 200
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
