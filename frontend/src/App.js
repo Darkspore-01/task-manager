@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import TaskList from './TaskList'; // <--- Add this import
-// import axios from 'axios'; // No need for axios here unless App.js makes direct axios calls
+import TaskList from './components/TaskList'; // <--- IMPORTANT: Ensure this path is correct based on your file structure
+import './App.css'; // Assuming App.css is in the same directory as App.js
 
 function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // It's good practice to define backend URL consistently
-  // Use REACT_APP_BACKEND_URL for the health check as well for consistency
-  const BACKEND_HEALTH_URL = process.env.REACT_APP_BACKEND_URL; // Use this variable
+  const BACKEND_HEALTH_URL = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BACKEND_HEALTH_URL}`); // Use the consistent variable
+        // --- CRITICAL CHANGE HERE ---
+        // Your backend health endpoint is likely /health, not just the base URL
+        const response = await fetch(`${BACKEND_HEALTH_URL}/health`);
+        // --- END CRITICAL CHANGE ---
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
         setData(result.message);
       } catch (err) {
-        setError("Error: API Error: Failed to fetch");
+        setError("Error: API Error: Failed to fetch backend health"); // More specific error message
         console.error("Fetch error:", err);
       } finally {
         setLoading(false);
@@ -41,7 +43,7 @@ function App() {
 
       <hr /> {/* Optional separator */}
       <h2>Your Tasks</h2>
-      <TaskList /> {/* <--- Add this line to render TaskList */}
+      <TaskList /> {/* This will render your TaskList component */}
     </div>
   );
 }
