@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios'; // You might not need axios directly in App.js if TaskList uses it
-import TaskList from './TaskList'; // Assuming TaskList.js is in the same directory
+import TaskList from './TaskList'; // <--- Add this import
+// import axios from 'axios'; // No need for axios here unless App.js makes direct axios calls
 
 function App() {
   const [data, setData] = useState(null);
@@ -8,16 +8,13 @@ function App() {
   const [error, setError] = useState(null);
 
   // It's good practice to define backend URL consistently
-  // If REACT_APP_API_URL is already set in Vercel for your root endpoint, that's fine.
-  // Or you can use REACT_APP_BACKEND_URL for all backend calls.
-  const BACKEND_HEALTH_URL = process.env.REACT_APP_API_URL || process.env.REACT_APP_BACKEND_URL;
-
+  // Use REACT_APP_BACKEND_URL for the health check as well for consistency
+  const BACKEND_HEALTH_URL = process.env.REACT_APP_BACKEND_URL; // Use this variable
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Use the environment variable here for the health check
-        const response = await fetch(`${BACKEND_HEALTH_URL}`);
+        const response = await fetch(`${BACKEND_HEALTH_URL}`); // Use the consistent variable
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -42,10 +39,9 @@ function App() {
       {data && <p>{data}</p>} {/* This will show "Backend is running!" */}
       <p>Learn <a href="YOUR_BACKEND_DOCS_URL_IF_ANY">ReactView Backend API</a></p>
 
-      {/* Render the TaskList component here */}
       <hr /> {/* Optional separator */}
       <h2>Your Tasks</h2>
-      <TaskList />
+      <TaskList /> {/* <--- Add this line to render TaskList */}
     </div>
   );
 }
