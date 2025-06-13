@@ -31,7 +31,7 @@ function App() {
     };
 
     fetchData();
-  }, [process.env.REACT_APP_API_URL]);
+  }, [BACKEND_HEALTH_URL]);
 
   return (
     <div className="App">
